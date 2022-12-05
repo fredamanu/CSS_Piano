@@ -1,0 +1,109 @@
+/* Browsers can apply default margin and 
+padding values to specific elements. 
+To make sure your piano looks correct, 
+you need to reset the box model. */
+html {
+  box-sizing: border-box;
+}
+
+/* Now that you have reset the html box model, you need 
+to pass that on to the elements within as well. 
+To do this, you can set the box-sizing property 
+to inherit, which will tell the targeted elements
+to use the same value as the parent element.
+You will also need to target the pseudo-elements, 
+which are special keywords that follow a selector. 
+The two pseudo-elements you will be using are 
+the ::before and ::after pseudo-elements.
+The ::before selector creates a pseudo-element which is 
+the first child of the selected element, while 
+the ::after selector creates a pseudo-element which is 
+the last child of the selected element. These pseudo-elements are 
+often used to create cosmetic content. */
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+#piano {
+  background-color: #00471b;
+  width: 992px;
+  height: 290px;
+  margin: 80px auto;
+  padding: 90px 20px 0 20px;
+  position: relative;
+  border-radius: 10px;
+}
+
+.keys {
+  background-color: #040404;
+  width: 949px;
+  height: 180px;
+  padding-left: 2px;
+  overflow: hidden;
+}
+
+.key {
+  background-color: #fff;
+  position: relative;
+  width: 41px;
+  height: 175px;
+  margin: 2px;
+  float: left;
+  border-radius: 0 0 3px 3px;
+}
+
+/* Now it is time to use the pseudo-selectors you prepared for earlier. 
+To create the black keys, add a new .key.black--key::after selector. 
+This will target the elements with the class key black--key, and select 
+the pseudo-element after these elements in the HTML.
+In the new selector, set the background-color to #1d1e22. 
+Also set the content property to "". This will make the pseudo-elements empty.
+The content property is used to set or override the content of the element. 
+By default, the pseudo-elements created by the ::before and ::after pseudo-selectors 
+are empty, and the elements will not be rendered to the page. Setting the content 
+property to an empty string "" will ensure the element is rendered to the page while 
+still being empty.
+If you would like to experiment, try removing the background-color property 
+and setting different values for the content property, such as "♥". 
+Remember to undo these changes when you are done so the tests pass. */
+
+.key.black--key::after {
+  background-color: #1d1e22;
+  content: "";
+  position: absolute;
+  left: -18px;
+  width: 32px;
+  height: 100px;
+  border-radius: 0 0 3px 3px;
+}
+
+.logo {
+  position: absolute;
+  top: 23px;
+  width: 200px;
+}
+
+@media (max-width: 768px) {
+  #piano {
+    width: 358px;
+  }
+  .keys {
+    width: 318px;
+  }
+  .logo {
+    width: 150px;
+  }
+}
+
+/* when the screen is bigger than 768px but smaller than 1199px */
+@media (min-width: 769px) and (max-width: 1199px) {
+  #piano {
+    width: 675px;
+  }
+  .keys {
+    width: 633px;
+  }
+}
